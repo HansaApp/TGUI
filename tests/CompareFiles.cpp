@@ -35,11 +35,11 @@ bool compareFiles(const std::string& leftFileName, const std::string& rightFileN
     bool result;
 
     // Open the two files.
-    leftFile.open(leftFileName.c_str(), ios_base::in | ios_base::binary);
+    leftFile.open(leftFileName.c_str(), std::ios_base::in | std::ios_base::binary);
     if (!leftFile.is_open())
         return false;
 
-    rightFile.open(rightFileName.c_str(), ios_base::in | ios_base::binary);
+    rightFile.open(rightFileName.c_str(), std::ios_base::in | std::ios_base::binary);
     if (!rightFile.is_open())
     {
         leftFile.close();
