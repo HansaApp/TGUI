@@ -25,7 +25,6 @@
 #include "Tests.hpp"
 #include <fstream>
 #include <cstring>
-#include <iostream>
 
 bool compareFiles(const std::string& leftFileName, const std::string& rightFileName)
 {
@@ -36,11 +35,11 @@ bool compareFiles(const std::string& leftFileName, const std::string& rightFileN
     bool result;
 
     // Open the two files.
-    leftFile.open(leftFileName.c_str());
+    leftFile.open(leftFileName.c_str(), ios_base::in | ios_base::binary);
     if (!leftFile.is_open())
         return false;
 
-    rightFile.open(rightFileName.c_str());
+    rightFile.open(rightFileName.c_str(), ios_base::in | ios_base::binary);
     if (!rightFile.is_open())
     {
         leftFile.close();
@@ -53,9 +52,6 @@ bool compareFiles(const std::string& leftFileName, const std::string& rightFileN
         leftFile.get(leftRead);
         rightFile.get(rightRead);
         result = (leftRead == rightRead);
-        
-        if (leftFileName == "BitmapButton_Disabled_NormalSet.png")
-            std::cout << (int)leftRead << " == " << (int)rightRead << std::endl;
     }
 
     if (result)
@@ -66,7 +62,6 @@ bool compareFiles(const std::string& leftFileName, const std::string& rightFileN
 
     leftFile.close();
     rightFile.close();
-    std::cout << result << " " << leftFileName << " " << rightFileName << std::endl;
     return result;
 }
 
