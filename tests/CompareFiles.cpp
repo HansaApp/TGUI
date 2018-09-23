@@ -25,6 +25,7 @@
 #include "Tests.hpp"
 #include <fstream>
 #include <cstring>
+#include <iostream>
 
 bool compareFiles(const std::string& leftFileName, const std::string& rightFileName)
 {
@@ -62,6 +63,7 @@ bool compareFiles(const std::string& leftFileName, const std::string& rightFileN
 
     leftFile.close();
     rightFile.close();
+    std::cout << result << " " << leftFileName << " " << rightFileName << std::endl;
     return result;
 }
 

@@ -28,9 +28,7 @@ matrix:
   fast_finish: true
 
 cache:
-  - C:\SFML-VS2017 -> .appveyor.yml
-  - C:\SFML-VS2015 -> .appveyor.yml
-  - C:\SFML        -> .appveyor.yml
+  - C:\SFML-VS2017
 
 install:
 - IF "%SFML_VERSION%" == "master" (
@@ -100,10 +98,7 @@ build_script:
       cd .. &&
       IF "%BUILD_TESTS%"=="TRUE" (
         cd %BUILD_FOLDER%\tests\%BUILD_TYPE% &&
-        tests.exe &&
-        cd .. &&
-        7z a -tzip Test.zip %BUILD_TYPE% > nul &&
-        appveyor PushArtifact Test.zip
+        tests.exe
       )
     ) ELSE IF "%APPVEYOR_PULL_REQUEST_NUMBER%" == "" IF /I "%APPVEYOR_REPO_TAG%"=="false" (
       cd .. &&
