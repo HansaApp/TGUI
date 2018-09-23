@@ -22,21 +22,6 @@ environment:
       FAST_BUILD:     TRUE
       BUILD_FOLDER:   build-VS2017-Win64
 
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      SFML_PATH:      C:\SFML-VS2015
-      SFML_VERSION:   2.5.0
-      GENERATOR:      Visual Studio 14 2015
-      BUILD_TYPE:     Release
-      SHARED_LIBS:    TRUE
-      BUILD_TESTS:    FALSE
-      BUILD_EXAMPLES: TRUE
-      FAST_BUILD:     FALSE
-      BUILD_FOLDER:   build-VS2015-Win32
-
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      SFML_PATH:      C:\SFML
-      SFML_VERSION:   2.5.0
-
 clone_depth: 3
 
 matrix:
@@ -116,6 +101,9 @@ build_script:
       IF "%BUILD_TESTS%"=="TRUE" (
         cd %BUILD_FOLDER%\tests\%BUILD_TYPE% &&
         tests.exe
+        cd ..
+        7z a -tzip Test.zip %BUILD_TYPE% > nul &&
+        appveyor PushArtifact Test.zip &&
       )
     ) ELSE IF "%APPVEYOR_PULL_REQUEST_NUMBER%" == "" IF /I "%APPVEYOR_REPO_TAG%"=="false" (
       cd .. &&
