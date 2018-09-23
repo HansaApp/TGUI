@@ -53,6 +53,9 @@ bool compareFiles(const std::string& leftFileName, const std::string& rightFileN
         leftFile.get(leftRead);
         rightFile.get(rightRead);
         result = (leftRead == rightRead);
+        
+        if (leftFileName == "BitmapButton_Disabled_NormalSet.png")
+            std::cout << (int)leftRead << " == " << (int)rightRead << std::endl;
     }
 
     if (result)
